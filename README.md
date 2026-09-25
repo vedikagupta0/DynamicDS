@@ -4,6 +4,7 @@
 
 This platform prevents data leakage through strict cross-validation boundaries and chronological splits, ensuring that every model's performance is strictly compared against naive baselines to rigorously validate predictive power.
 ---
+<img width="1917" height="1027" alt="image" src="https://github.com/user-attachments/assets/c9ac6306-c513-4466-ad53-b6b050caf235" />
 
 ## 1. The Problem We Solve
 Most "upload a CSV, get a model" tools obscure the intermediate steps. Dynamic DS keeps every decision visible: 
