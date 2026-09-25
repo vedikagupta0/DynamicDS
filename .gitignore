@@ -8,7 +8,8 @@ node_modules/
 resume.md
 venv/
 /venv/
-
+/demo
+demo/
 # Logs
 logs
 *.log
