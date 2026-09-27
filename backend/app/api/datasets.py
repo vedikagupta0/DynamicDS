@@ -26,8 +26,8 @@ def _eda(dataset_id, target, problem_type):
         if target and target not in [c["name"] for c in meta["profile"]["columns"]]:
             raise HTTPException(422, f"Unknown column '{target}'.")
         if len(_eda_cache) > 20:
-            _eda_cache.pop(next(iter(_eda_cache)))
-        _eda_cache[key] = to_jsonable(eda_svc.build_eda(storage.load_typed(dataset_id), meta["profile"], target, problem_type))
+            _eda_cache.pop(next(iter(_eda_cache))) # this will remove the oldest key-value pair i.e. LRU ( Least Recently Used ) cache implementation
+        _eda_cache[key] = to_jsonable(eda_svc.build_eda(storage.load_typed(dataset_id), meta["profile"], target, problem_type)) # this is a heavy operation, hence caching it
     return _eda_cache[key]
 
 

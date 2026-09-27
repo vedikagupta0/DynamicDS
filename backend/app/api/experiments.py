@@ -124,7 +124,7 @@ def experiment_report(exp_id: str):
     e = to_jsonable(eda_svc.build_eda(storage.load_typed(exp["dataset_id"]), meta["profile"], target if exp["mode"] == "standard" else None,
                                       exp["config"].get("problem_type")))
     html = report.build_report(meta, build_warnings(meta["profile"], meta["quality"], e, target if exp["mode"] == "standard" else None), e, exp)
-    return HTMLResponse(html, headers={"Content-Disposition": f'attachment; filename="autods-model-{exp_id}.html"'})
+    return HTMLResponse(html, headers={"Content-Disposition": f'attachment; filename="dynamicds-model-{exp_id}.html"'})
 
 
 # ---------------------------------------------------------------- registry
@@ -184,8 +184,7 @@ async def batch_predict(exp_id: str, file: UploadFile = File(...), model: str | 
         out["confidence"] = [p["confidence"] for p in res["predictions"]]
     buf = io.StringIO()
     out.to_csv(buf, index=False)
-    return Response(buf.getvalue(), media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="predictions-{exp_id}.csv"',
-                                                                    "X-Missing-Columns": ",".join(res["missing_columns"])})
+    return Response(buf.getvalue(), media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="predictions-{exp_id}.csv"',                       "X-Missing-Columns": ",".join(res["missing_columns"])})
 
 
 @router.post("/forecast")

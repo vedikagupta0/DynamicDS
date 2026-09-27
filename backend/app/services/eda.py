@@ -276,14 +276,13 @@ def build_eda(df: pd.DataFrame, profile: dict, target: str | None = None, proble
     meta = {m["name"]: m for m in profile["columns"]}
     n = len(df)
     by = lambda t: [c for c, m in meta.items() if m["semantic_type"] == t]
-    num_cols = [c for c in by("numerical")]
     eda = {
-        "numeric": [numeric_stats(df[c], n) for c in num_cols],
+        "numeric": [numeric_stats(df[c], n) for c in by("numerical")],
         "categorical": [categorical_stats(df[c], n) for c in by("categorical")],
         "boolean": [boolean_stats(df[c], n) for c in by("boolean")],
         "text": [text_stats(df[c], n) for c in by("text")],
         "datetime": [datetime_stats(df[c], n) for c in by("datetime")],
-        "correlation": correlation_analysis(df, num_cols, meta),
+        "correlation": correlation_analysis(df, by('numerical'), meta),
         "sampling": {"plots_sampled_above_rows": C.VIS_SAMPLE_ROWS, "rows": n,
                      "note": "Statistics use the full dataset. KDE curves and normality tests use a random sample when the column has more rows than the limit."},
         "target": analyze_target(df, meta, target, problem_type) if target and target in meta else None,

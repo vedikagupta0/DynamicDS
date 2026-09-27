@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from app import config as C
 from app.api import datasets, experiments
 
-app = FastAPI(title="Dynamic DS", version="1.0.0", description="EDA provider and baseline model tester.")
+app = FastAPI(title="Dynamic DS", version="1.0.0", description="EDA provider and baseline tester.")
 app.include_router(datasets.router)
 app.include_router(experiments.router)
 

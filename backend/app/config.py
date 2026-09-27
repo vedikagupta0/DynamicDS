@@ -20,8 +20,8 @@ PLACEHOLDER_TOKENS = {
 # ---- missingness bands (percent) ---------------------------------------------
 MISSING_LOW = 5.0        # (0, 5)   -> low
 MISSING_MODERATE = 20.0  # [5, 20)  -> moderate
-MISSING_HIGH = 50.0      # [20, 50) -> high ; >= 50 -> very high
-ROW_MISSING_FLAG = 0.5   # fraction of a row's cells missing to flag the row
+MISSING_HIGH = 80.0      # [20, 50) -> high ; >= 50 -> very high
+ROW_MISSING_FLAG = 0.7   # fraction of a row's cells missing to flag the row
 
 # ---- skewness ------------------------------------------------------------------
 SKEW_SYMMETRIC = 0.5     # |skew| < 0.5  -> approximately symmetric
@@ -36,7 +36,7 @@ LEAKAGE_ASSOC = 0.95     # feature-target association at/above this is suspiciou
 
 # ---- identifiers / cardinality / constants -----------------------------------------
 ID_STRONG_UNIQUE = 0.99          # id-like name and >= 99% unique
-ID_NAME_POSSIBLE_UNIQUE = 0.5    # id-like name and >= 50% unique
+ID_NAME_POSSIBLE_UNIQUE = 0.8    # id-like name and >= 80% unique
 ID_POSSIBLE_UNIQUE = 0.90        # no id-like name, string/integer, >= 90% unique
 ID_MIN_ROWS = 30                 # uniqueness-only rules need at least this many rows
 CARD_LOW = 10                    # unique count <= 10 -> low ; <= 50 medium ; > 50 high
@@ -54,9 +54,9 @@ TEXT_MIN_MEDIAN_TOKENS = 5
 TEXT_MIN_UNIQUE_RATIO = 0.3
 
 # ---- visualisation sampling --------------------------------------------------------------
-VIS_SAMPLE_ROWS = 5000
+VIS_SAMPLE_ROWS = 50_000
 ASSOC_SAMPLE_ROWS = 100_000
-SHAPIRO_MAX = 5000
+SHAPIRO_MAX = 50_000
 
 # ---- modelling ----------------------------------------------------------------------------------
 OHE_MAX_CATEGORIES = 30

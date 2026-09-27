@@ -9,6 +9,8 @@ _LABELS = {"MS": "monthly", "QS": "quarterly", "YS": "yearly", "D": "daily", "h"
 
 def normalise_alias(alias: str) -> str:
     a = alias.upper() if alias[:1] in "mqyaMQYA" and not alias.startswith("min") else alias
+    # this checks if alias starts with m,q,y,a (for month, quarter, year, annual) and not "min" (for minutely) and converts to uppercase
+    
     if a.startswith(("M", "ME")):
         return "MS"
     if a.startswith("Q"):
