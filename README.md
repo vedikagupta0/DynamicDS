@@ -1,8 +1,8 @@
 # Dynamic DS — Explainable ML Pipeline & Baseline Engine
 
-**Dynamic DS** is a production-shaped, explainable machine learning platform designed to provide rigorous baseline testing, automated exploratory data analysis (EDA), and data-quality profiling. Unlike "black-box" AutoML tools, Dynamic DS enforces transparency at every step: all data transformations, feature engineering choices, and model evaluations are fully visible and justifiable. 
+### **Dynamic DS** is a production-shaped, explainable machine learning platform designed to provide rigorous baseline testing, automated exploratory data analysis (EDA), and data-quality profiling. Unlike "black-box" AutoML tools, Dynamic DS enforces transparency at every step: all data transformations, feature engineering choices, and model evaluations are fully visible and justifiable. 
 ![alt text](image.png)
-This platform prevents data leakage through strict cross-validation boundaries and chronological splits, ensuring that every model's performance is strictly compared against naive baselines to rigorously validate predictive power.
+### This platform prevents data leakage through strict cross-validation boundaries and chronological splits, ensuring that every model's performance is strictly compared against naive baselines to rigorously validate predictive power.
 ---
 
 ## 1. The Problem We Solve
@@ -77,4 +77,3 @@ The backend is fortified by a comprehensive test suite covering type inference, 
 cd backend
 pytest -q
 ```
-*Currently all tests passing end-to-end.*
