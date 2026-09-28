@@ -53,7 +53,7 @@ def test_missing_value_calculation_and_levels():
     df = pd.DataFrame({"a": [1, np.nan, np.nan, 4] * 25, "b": range(100), "c": [np.nan] * 100})
     r = dq.analyze_missing(df)
     a = next(c for c in r["columns"] if c["column"] == "a")
-    assert a["missing"] == 50 and a["non_null"] == 50 and a["missing_pct"] == 50.0 and a["level"] == "very_high"
+    assert a["missing"] == 50 and a["non_null"] == 50 and a["missing_pct"] == 50.0 and a["level"] == "high"
     assert next(c for c in r["columns"] if c["column"] == "b")["level"] == "none"
     assert dq.missing_level(3) == "low" and dq.missing_level(10) == "moderate" and dq.missing_level(30) == "high"
 

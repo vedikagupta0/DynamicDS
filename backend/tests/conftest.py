@@ -1,5 +1,7 @@
+import os
+import tempfile
+
 os.environ["DYNAMICDS_DATA_DIR"] = tempfile.mkdtemp(prefix="dynamicds_test_")
-os.environ["AUTODS_DATA_DIR"] = os.environ["DYNAMICDS_DATA_DIR"]
 
 import numpy as np
 import pandas as pd

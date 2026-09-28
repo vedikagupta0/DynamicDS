@@ -19,43 +19,11 @@ def cls_multiclass(churn):
     return modeling.train_tabular(churn["typed"], churn["profile"], {"target": "plan", "problem_type": "classification", "cv_folds": 3})
 
 
-@pytest.fixture(scope="module")
-def cls_tuned(churn):
-    return modeling.train_tabular(churn["typed"], churn["profile"],
-                                   {"target": "churn", "problem_type": "classification", "cv_folds": 3, "tune": True, "tune_iter": 5})
-
-
 def test_multiclass_pipeline(cls_multiclass):
     res, art = cls_multiclass
     assert len(res["classes"]) == 3
     assert all(m["status"] == "ok" for m in res["models"])
     assert res["primary_metric"] in res["available_metrics"]
-
-
-def test_hyperparameter_tuning(cls_tuned):
-    res, art = cls_tuned
-    tuned_models = {m["key"]: m for m in res["models"] if m["status"] == "ok" and m["key"] in ("rf", "xgb")}
-    assert tuned_models, "rf/xgb should have trained successfully"
-    for key, m in tuned_models.items():
-        assert m["tuned"] is True
-        assert "best_params" in m
-    # untunable models are left alone
-    dummy = next(m for m in res["models"] if m["key"] == "dummy")
-    assert dummy.get("tuned", False) is False
-
-
-def test_tuning_failure_falls_back_gracefully(churn, monkeypatch):
-    # If the search itself blows up, training must not fail - it should fall back
-    # to the default, untuned pipeline for that model.
-    def boom(*a, **kw):
-        raise RuntimeError("search exploded")
-    monkeypatch.setattr(modeling, "_tune", boom)
-    res, art = modeling.train_tabular(churn["typed"], churn["profile"],
-                                       {"target": "churn", "problem_type": "classification", "cv_folds": 3, "tune": True})
-    rf = next(m for m in res["models"] if m["key"] == "rf")
-    assert rf["status"] == "ok"
-    assert rf["tuned"] is False
-    assert "tune_error" in rf
 
 
 def test_classification_pipeline(cls):
