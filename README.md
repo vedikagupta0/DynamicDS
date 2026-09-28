@@ -77,4 +77,4 @@ The backend is fortified by a comprehensive test suite covering type inference, 
 cd backend
 pytest -q
 ```
-*Currently 49/49 tests passing end-to-end.*
+*Currently all tests passing end-to-end.*
